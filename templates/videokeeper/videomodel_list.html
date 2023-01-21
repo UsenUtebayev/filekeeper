@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ videos.title }}</title>
+</head>
+<body>
+
+{% if request.user.is_authenticated %}
+    <span>Добро пожаловать, {{ user.username }} | <a href="{% url 'logout' %}">Выход</a></span>
+{% else %}
+    <a href="{% url 'register' %}"> Register </a> | <a href="{% url 'login' %}"> Login </a>
+{% endif %}
+
+
+
+{% for i in videos %}
+    <div>
+        <h1>{{ i.name }}</h1>
+        <p>{{ i.description }}</p>
+        <video width="320" , height="240" controls>
+            <source src="{{ i.videoUrl.url }}">
+        </video>
+    </div>
+{% endfor %}
+</body>
+</html>
